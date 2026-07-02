@@ -1,0 +1,23 @@
+{% load static %}
+
+<nav class="sidenav">
+    <h3 class="sidenav-title">Категории</h3>
+    <ul class="sidenav-list">
+        {% for category in categories %}
+        <li class="sidenav-item">
+            <a href="{% url 'shop:product_list_by_category' category.slug %}" class="sidenav-link">
+                {% if category.icon %}
+                    <img src="{{ category.icon.url }}" alt="{{ category.name }}" class="sidenav-icon">
+                {% else %}
+                    <img src="{% static 'images/default-category-icon.png' %}" alt="{{ category.name }}" class="sidenav-icon">
+                {% endif %}
+                <span class="sidenav-name">{{ category.name }}</span>
+            </a>
+        </li>
+        {% empty %}
+        <li class="sidenav-item">
+            <span class="sidenav-name">Категории не найдены</span>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
